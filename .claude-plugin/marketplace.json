@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-ops-plugins",
+  "version": "1.0.0",
+  "description": "Operational and runtime utilities for Claude Code agents",
+  "owner": {
+    "name": "Jeremy Jacobs",
+    "email": "pub@j4c0bs.net"
+  },
+  "plugins": [
+    {
+      "name": "context-tracker",
+      "description": "Exposes context window usage percentage to agents via a simple CLI command",
+      "version": "1.0.0",
+      "author": {
+        "name": "Jeremy Jacobs"
+      },
+      "source": "./plugins/context-tracker",
+      "category": "productivity"
+    }
+  ]
+}
