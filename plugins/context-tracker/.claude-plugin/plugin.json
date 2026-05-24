@@ -1,6 +1,6 @@
 {
   "name": "context-tracker",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Exposes context window usage percentage to agents via a simple CLI command",
   "author": {
     "name": "Jeremy Jacobs"

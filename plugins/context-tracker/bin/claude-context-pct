@@ -1,4 +1,4 @@
 #!/bin/bash
 _sid="${1:-$CLAUDE_CODE_SESSION_ID}"
-_file="/private/tmp/claude-$(id -u)/context/${_sid}.json"
-jq -r '.used_pct' "$_file" 2>/dev/null || echo "-1"
+_file="/tmp/claude-$(id -u)/context/${_sid}.json"
+_pct=$(jq -r '.used_pct' "$_file" 2>/dev/null) && echo "${_pct}%" || echo "-1"
