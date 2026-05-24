@@ -47,8 +47,8 @@ The plugin gives agents *visibility* into context usage but does not define what
 
 Some common patterns:
 
-- **Handoff preparation**: "When context usage reaches 70%, wrap up the current task, commit progress, and prepare a handoff summary for the next session."
+- **Handoff preparation**: "When context usage reaches 50%, wrap up the current task, commit progress, and prepare a handoff summary for the next session."
 - **Periodic check-ins**: "Run `claude-context-pct` after completing each major task to decide whether to continue or hand off."
-- **Conservative pacing**: "If context exceeds 50%, avoid spawning new subagents and prefer smaller, focused tool calls."
+- **Delegate to subagents**: "If context exceeds 50%, prefer delegating work to subagents — their tool calls and results don't add tokens to the main agent's context window."
 
 Choose thresholds and actions that match your workflow — there are no universal defaults.
