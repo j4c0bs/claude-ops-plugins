@@ -4,5 +4,8 @@
   "description": "Exposes context window usage percentage to agents via a simple CLI command",
   "author": {
     "name": "Jeremy Jacobs"
-  }
+  },
+  "repository": "https://github.com/j4c0bs/claude-ops-plugins",
+  "license": "MIT",
+  "keywords": ["context-window", "statusline", "usage", "handoff", "self-pacing"]
 }
