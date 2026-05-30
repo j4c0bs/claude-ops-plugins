@@ -15,24 +15,24 @@ Add the following block to your statusline script (e.g. `~/.claude/statusline.sh
 ```bash
 # --- BEGIN context-tracker (claude-ops-plugins) ---
 _ctx_dir="/tmp/claude-$(id -u)/context"
-_ctx_session_id=$(echo "$input" | jq -r '.session_id // empty')
-if [ -n "$pct" ] && [ -n "$_ctx_session_id" ]; then
+{ read -r _ctx_session_id; read -r _ctx_pct; read -r _ctx_cwd; } <<< "$(echo "$input" | jq -r '
+  (.session_id // ""),
+  (.context_window.used_percentage // 0 | floor),
+  .workspace.current_dir
+')"
+if [ -n "$_ctx_pct" ] && [ -n "$_ctx_session_id" ]; then
     mkdir -p "$_ctx_dir" 2>/dev/null
     chmod 700 "$_ctx_dir" 2>/dev/null
     _ctx_tmp=$(mktemp "$_ctx_dir/.ctx.XXXXXX")
     printf '{"session_id":"%s","used_pct":%s,"cwd":"%s","updated_at":"%s"}\n' \
-        "$_ctx_session_id" "${pct:-0}" "$cwd" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+        "$_ctx_session_id" "${_ctx_pct:-0}" "$_ctx_cwd" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
         > "$_ctx_tmp"
     mv -f "$_ctx_tmp" "$_ctx_dir/${_ctx_session_id}.json"
 fi
 # --- END context-tracker (claude-ops-plugins) ---
 ```
 
-**Requirements**: The snippet expects two variables from your statusline script:
-- `$pct` — the context window percentage (integer), extracted from `.context_window.used_percentage`
-- `$cwd` — the workspace directory, extracted from `.workspace.current_dir`
-
-If your statusline uses different variable names, adjust accordingly.
+The snippet is self-contained — it extracts everything it needs from the `$input` JSON that Claude Code passes to statusline scripts. No external variables required.
 
 ## Usage
 
