@@ -49,6 +49,6 @@ Some common patterns:
 
 - **Handoff preparation**: "When context usage reaches 50%, wrap up the current task, commit progress, and prepare a handoff summary for the next session."
 - **Periodic check-ins**: "Run `claude-context-pct` after completing each major task to decide whether to continue or hand off."
-- **Delegate to subagents**: "If context exceeds 50%, prefer delegating work to subagents — their tool calls and results don't add tokens to the main agent's context window."
+- **Delegate to subagents**: "If context exceeds 50%, prefer delegating work to subagents — their intermediate work (tool calls, file reads, reasoning) stays in their own context window, not the main agent's. Only the final result summary is returned."
 
 Choose thresholds and actions that match your workflow — there are no universal defaults.
